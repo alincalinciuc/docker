@@ -18,8 +18,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-software-propert
 # install openssh server
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo 'root:Parola123' | chpasswd
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+#RUN echo 'root:Parola123' | chpasswd
+#RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Install needed packages
 RUN apt-get install -q -y zip unzip curl
