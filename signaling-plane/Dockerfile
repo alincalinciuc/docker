@@ -19,7 +19,7 @@ RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
 # Install needed packages
-RUN apt-get install -q -y gradle zip unzip curl default-jdk wget git maven apache2
+RUN apt-get install -q -y gradle zip unzip curl java7-jdk wget git maven apache2
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
@@ -38,15 +38,13 @@ RUN apt-get update -y
 RUN apt-get install kurento-media-server -y
 
 # Get SIP from git and compile it
-RUN git clone http://80.96.122.50/frank.schulze/signaling-plane.git
-RUN cd signaling-plane
-RUN ./compile_modules
-RUNecho "TODO: configure signaling plane in nubomedia_signaling_plane.json"
+RUN git clone http://80.96.122.50/frank.schulze/signaling-plane.git && cd signaling-plane && ./compile_modules
+RUN echo "TODO: configure signaling plane in nubomedia_signaling_plane.json"
 RUN echo "TODO: configure clustering if needed"
 RUN echo "starting signaling plane"
 
 # Disable IPV6
-sed -i '$ a\net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1' /etc/sysctl.conf
+RUN sed -i '$ a\net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1' /etc/sysctl.conf
 
 EXPOSE 22
 ENTRYPOINT /usr/local/bin/fix_docker_on_openstack.sh | /usr/sbin/sshd -D
