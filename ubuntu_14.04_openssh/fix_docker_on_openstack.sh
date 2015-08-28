@@ -30,4 +30,7 @@ sed -i " 1 s/.*/& $instance_name/" /etc/hosts
 # Add DNS server
 sed -i "\$anameserver 8.8.8.8" /etc/resolv.conf
 
-
+# Get user-data and run them
+curl -o /tmp/user-data.sh http://169.254.169.254/2009-04-04/user-data
+chmod +x /tmp/user-data.sh
+cd /tmp && ./user-data.sh

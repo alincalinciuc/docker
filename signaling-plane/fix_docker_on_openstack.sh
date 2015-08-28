@@ -27,4 +27,10 @@ sync
 instance_name=$(curl http://169.254.169.254/latest/meta-data/hostname)
 sed -i " 1 s/.*/& $instance_name/" /etc/hosts
 
+# Compile Signaling Plane
 ./root/signaling-plane/compile_modules
+
+# Get user-data and run them
+curl -o /tmp/user-data.sh http://169.254.169.254/2009-04-04/user-data
+chmod +x /tmp/user-data.sh
+cd /tmp && ./user-data.sh
