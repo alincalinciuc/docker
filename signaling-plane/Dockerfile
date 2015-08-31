@@ -31,14 +31,8 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 ADD fix_docker_on_openstack.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/fix_docker_on_openstack.sh
 
-RUN add-apt-repository ppa:kurento/kurento -y
-
-# Install Kurento Media Server
-RUN apt-get update -y
-RUN apt-get install kurento-media-server -y
-
 # Get SIP from git and compile it
-RUN git clone http://80.96.122.50/frank.schulze/signaling-plane.git && cd signaling-plane && ./compile_modules
+RUN git clone http://git.nubomedia.eu/alice.cheambe/signaling-plane.git && cd signaling-plane && ./compile_modules
 RUN echo "TODO: configure signaling plane in nubomedia_signaling_plane.json"
 RUN echo "TODO: configure clustering if needed"
 RUN echo "starting signaling plane"
