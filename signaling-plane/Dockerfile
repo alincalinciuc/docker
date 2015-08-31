@@ -40,5 +40,5 @@ RUN echo "starting signaling plane"
 # Disable IPV6
 RUN sed -i '$ a\net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1' /etc/sysctl.conf
 
-EXPOSE 22
+EXPOSE 22 5060
 ENTRYPOINT /usr/local/bin/fix_docker_on_openstack.sh | /usr/sbin/sshd -D
