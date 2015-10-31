@@ -7,6 +7,7 @@ instance_name=${array[0]}
 instance_name_local=$("hostname")
 echo "" > /etc/hosts
 echo "127.0.0.1 localhost $instance_name $instance_name_local" > /etc/hosts
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 # Restart kurento
 /etc/init.d/kurento-media-server-6.0 restart
