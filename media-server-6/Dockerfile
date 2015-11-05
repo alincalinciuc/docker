@@ -2,7 +2,7 @@
 #
 # VERSION               0.0.2
 
-FROM alincalinciuc/nubomedia
+FROM nubomedia/baseimage
 MAINTAINER Alin CALINCIUC <alin.calinciuc@gmail.com>
 
 # add google dns
