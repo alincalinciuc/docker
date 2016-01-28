@@ -12,10 +12,11 @@ RUN apt-get update -y
 # Install needed packages
 RUN apt-get install -q -y zip unzip default-jdk git maven apache2
 
+RUN echo "RUN FROM HERE 2016"
+
 # Add Kurento Media Server repository and make sure the package repository is up to date
 RUN echo "deb http://ubuntu.kurento.org trusty kms6" | sudo tee /etc/apt/sources.list.d/kurento.list
 RUN wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
-RUN echo "RUN FROM HERE 2016"
 RUN apt-get update -y
 RUN apt-get install kurento-media-server-6.0 -y
 
@@ -44,8 +45,6 @@ RUN apt-get install nubo-ear-detector nubo-ear-detector-dev nubo-eye-detector nu
 RUN mkdir -p /usr/local/bin/
 ADD fix.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/fix.sh
-
-# Add init script for fixing docker on OpenStack
 ADD fix.conf /etc/init/
 
 # Add monitoring for media elements and pipelines
@@ -55,7 +54,8 @@ RUN rm -rf ~/kms-monitoring-java
 RUN cd ~/ && git clone https://github.com/usv-public/kms-monitoring-java.git
 
 # copy sendstats to init scripts
-RUN cp ~/kms-monitoring-java/scripts/sendstats /etc/init.d/sendstats
-RUN update-rc.d sendstats defaults
+RUN cp ~/kms-monitoring-java/scripts/sendstats.conf /etc/init/
+RUN cp ~/kms-monitoring-java/scripts/sendstats.sh /usr/local/bin/sendstats.sh
+RUN chmod +x /usr/local/bin/sendstats.sh
 
 EXPOSE 8888 22 25826
