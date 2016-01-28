@@ -15,6 +15,7 @@ RUN apt-get install -q -y zip unzip default-jdk git maven apache2
 # Add Kurento Media Server repository and make sure the package repository is up to date
 RUN echo "deb http://ubuntu.kurento.org trusty kms6" | sudo tee /etc/apt/sources.list.d/kurento.list
 RUN wget -O - http://ubuntu.kurento.org/kurento.gpg.key | sudo apt-key add -
+RUN echo "RUN FROM HERE 2016"
 RUN apt-get update -y
 RUN apt-get install kurento-media-server-6.0 -y
 

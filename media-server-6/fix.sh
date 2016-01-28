@@ -10,4 +10,8 @@ echo "127.0.0.1 localhost $instance_name $instance_name_local" > /etc/hosts
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 # Restart kurento
-/etc/init.d/kurento-media-server-6.0 restart
+service kurento-media-server-6.0 restart
+
+HOSTNAME_MONITORING="HOSTNAMEMONITORING"
+sed -i -e "s/$HOSTNAME_MONITORING/$instance_name/g" /etc/collectd/collectd.conf
+service collectd restart
