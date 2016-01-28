@@ -48,4 +48,14 @@ RUN chmod +x /usr/local/bin/fix.sh
 # Add init script for fixing docker on OpenStack
 ADD fix.conf /etc/init/
 
+# Add monitoring for media elements and pipelines
+RUN apt-get install git -y
+# Remove if exists
+RUN rm -rf ~/kms-monitoring-java
+RUN cd ~/ && git clone https://github.com/usv-public/kms-monitoring-java.git
+
+# copy sendstats to init scripts
+RUN cp ~/kms-monitoring-java/scripts/sendstats /etc/init.d/sendstats
+RUN update-rc.d sendstats defaults
+
 EXPOSE 8888 22 25826
