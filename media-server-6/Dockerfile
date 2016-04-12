@@ -43,10 +43,10 @@ RUN apt-get update -y
 RUN apt-get install nubo-ear-detector nubo-ear-detector-dev nubo-eye-detector nubo-eye-detector-dev nubo-face-detector nubo-face-detector-dev nubo-mouth-detector nubo-mouth-detector-dev nubo-nose-detector nubo-nose-detector-dev nubo-tracker nubo-tracker-dev nubo-vfence nubo-vfence-dev nubomotiondetector nubomotiondetector-dev -y
 
 # Install VTT Software
-#RUN echo "deb [arch=amd64] http://ssi.vtt.fi/ubuntu trusty main" | tee -a /etc/apt/sources.list
-#RUN apt-get update -y
-#RUN apt-get install ar-markerdetector -y --force-yes
-#RUN ldconfig
+RUN echo "deb [arch=amd64] http://ssi.vtt.fi/ubuntu trusty main" | tee -a /etc/apt/sources.list
+RUN apt-get update -y
+RUN apt-get install ar-markerdetector -y --force-yes
+RUN ldconfig
 
 # Upgrade
 #RUN apt-get upgrade -y
@@ -69,4 +69,4 @@ RUN chmod +x /usr/local/bin/sendstats.sh
 EXPOSE 8888 22 25826
 
 # Run after instace starts
-# CMD ["/sbin/init"]
+CMD ["/sbin/init"]
