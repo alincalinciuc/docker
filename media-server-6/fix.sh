@@ -19,3 +19,6 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 # Restart kurento
 service kurento-media-server-6.0 restart
 service ssh restart
+
+# Start monitoring tools
+sh /usr/local/bin/sendstats.sh
