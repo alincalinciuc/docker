@@ -16,9 +16,12 @@ echo "" > /etc/hosts
 echo "127.0.0.1 localhost $instance_name $instance_name_local" > /etc/hosts
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
+export INSTANCE_NAME=$instance_name
+
 # Restart kurento
 service kurento-media-server-6.0 restart
 service ssh restart
 
 # Start monitoring tools
-sh /usr/local/bin/sendstats.sh
+service monit restart
+service sendstats restart

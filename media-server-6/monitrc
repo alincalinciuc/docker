@@ -1,0 +1,13 @@
+set daemon 10
+set eventqueue
+  basedir /var/lib/monit
+  slots 20
+set httpd port 2812
+  allow 0.0.0.0/0.0.0.0        # allow localhost to connect to the server and
+  allow admin:monit      # require user 'admin' with password 'monit'
+
+# sendstats ######################################################################
+
+check process monit with pidfile /var/run/sendstats.pid
+  start program = "/etc/init.d/sendstats start"
+  stop program = "/etc/init.d/sendstats stop"

@@ -58,13 +58,16 @@ RUN chmod +x /usr/local/bin/fix.sh
 ADD fix.conf /etc/init/
 
 # Add monitoring for media elements and pipelines
+RUN echo "Update sendstats 13.04.2016 v3"
 RUN rm -rf ~/kms-monitoring-java
 RUN cd ~/ && git clone https://github.com/usv-public/kms-monitoring-java.git
 
 # copy sendstats to init scripts
-RUN cp ~/kms-monitoring-java/scripts/sendstats.conf /etc/init/
-RUN cp ~/kms-monitoring-java/scripts/sendstats.sh /usr/local/bin/sendstats.sh
-RUN chmod +x /usr/local/bin/sendstats.sh
+RUN cp ~/kms-monitoring-java/scripts/sendstats /etc/init.d/sendstats
+RUN chmod +x /etc/init.d/sendstats
+
+RUN apt-get install monit -y
+ADD monitrc /etc/monit/conf.d/monitrc
 
 EXPOSE 8888 22 25826
 
