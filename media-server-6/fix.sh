@@ -17,6 +17,7 @@ echo "127.0.0.1 localhost $instance_name $instance_name_local" > /etc/hosts
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 export INSTANCE_NAME=$instance_name
+export DISPLAY=:0
 
 # Restart kurento
 service kurento-media-server-6.0 restart

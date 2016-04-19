@@ -39,6 +39,8 @@ RUN apt-get install software-properties-common -y
 # Install VTools Software
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F04B5A6F
 RUN add-apt-repository "deb http://repository.nubomedia.eu/ trusty main"
+# Run from here
+RUN echo "release 26"
 RUN apt-get update -y
 RUN apt-get install nubo-ear-detector nubo-ear-detector-dev nubo-eye-detector nubo-eye-detector-dev nubo-face-detector nubo-face-detector-dev nubo-mouth-detector nubo-mouth-detector-dev nubo-nose-detector nubo-nose-detector-dev nubo-tracker nubo-tracker-dev nubo-vfence nubo-vfence-dev nubomotiondetector nubomotiondetector-dev -y
 
