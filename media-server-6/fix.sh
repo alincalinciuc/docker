@@ -7,7 +7,8 @@ HOSTNAME_MONITORING="HOSTNAMEMONITORING"
 instance_name=${instance_name::-10}
 sed -i -e "s/$HOSTNAME_MONITORING/$instance_name/g" /etc/collectd/collectd.conf
 service collectd restart
-
+sed -i -e "s/$HOSTNAME_MONITORING/$instance_name/g" /etc/logstash-forwarder.conf
+service logstash-forwarder restart
 
 # Remove ipv6 local loop until ipv6 is supported
 instance_name_nova=$(curl http://169.254.169.254/latest/meta-data/hostname)
@@ -26,3 +27,7 @@ service ssh restart
 # Start monitoring tools
 service monit restart
 service sendstats restart
+
+# Xinit
+cd ~/ && wget xpra.org/xorg.conf
+Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile /var/log/0.log -config ~/xorg.conf :0

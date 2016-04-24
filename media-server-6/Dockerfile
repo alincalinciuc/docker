@@ -71,6 +71,14 @@ RUN chmod +x /etc/init.d/sendstats
 RUN apt-get install monit -y
 ADD monitrc /etc/monit/conf.d/monitrc
 
+RUN apt-get install xinit -y
+RUN apt-get install libsoup2.4-dev -y
+RUN apt-get install xserver-xorg-video-dummy -y
+RUN echo "export DISPLAY=:0" >> /etc/default/kurento-media-server-6.0
+
+RUN rm -f /etc/logstash-forwarder.conf
+ADD logstash-forwarder.conf /etc/logstash-forwarder.conf
+
 EXPOSE 8888 22 25826
 
 # Run after instace starts
