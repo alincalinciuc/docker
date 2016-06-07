@@ -39,15 +39,21 @@ RUN apt-get install software-properties-common -y
 # Install VTools Software
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F04B5A6F
 RUN add-apt-repository "deb http://repository.nubomedia.eu/ trusty main"
-# Run from here
-RUN echo "release 26"
+
+# Run from here now
+RUN echo "release 28 - v2"
+
+# Add KMS6 Apt repository
+RUN echo "deb http://ubuntuci.kurento.org/6.4.0 trusty kms6" > /etc/apt/sources.list.d/kurento.list
 RUN apt-get update -y
+
 RUN apt-get install nubo-ear-detector nubo-ear-detector-dev nubo-eye-detector nubo-eye-detector-dev nubo-face-detector nubo-face-detector-dev nubo-mouth-detector nubo-mouth-detector-dev nubo-nose-detector nubo-nose-detector-dev nubo-tracker nubo-tracker-dev nubo-vfence nubo-vfence-dev nubomotiondetector nubomotiondetector-dev -y
 
 # Install VTT Software
 RUN echo "deb [arch=amd64] http://ssi.vtt.fi/ubuntu trusty main" | tee -a /etc/apt/sources.list
 RUN apt-get update -y
 RUN apt-get install ar-markerdetector -y --force-yes
+RUN apt-get install msdata -y --force-yes
 RUN ldconfig
 
 # Upgrade
